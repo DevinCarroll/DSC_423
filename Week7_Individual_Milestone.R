@@ -48,7 +48,7 @@ vif(modelMP)
 #summary(model_logMP)
 #model_logMP_MSE <- mean(model_logMP$residuals^2)
 
-testModel <- lm(PTS ~ TOV. + FTA + X3PA + MP + TRB., data = SF)
+testModel <- lm(PTS ~ G, data = SF)
 summary(testModel)
 testModel_MSE <- mean(testModel$residuals^2)
 vif(testModel)
@@ -86,9 +86,14 @@ validatedModel_avgMSE <- 7871
 
 #----------------------------
 # Below is the Final Model I will be presenting for this week.
-# But I am still considering whether or not to keep or drop MP
-week7_Model <- lm(PTS ~ TOV. + FTA + X3PA + TRB. + MP, data = SF)
+# But I am still considering whether or not to keep or drop MP & TRB
+# MP keeps residuals down. TRB doesn't do much
+# Both TOV. and TRB. could be replaced by log transformations of the total variables, but currently favor rates version for understability reasons
+# Additionally swapping Free Throws made could be swapped with FTA and only decreases A R^2 by ~3%
+week7_Model <- lm(PTS ~ TOV. + FTA + X3PA + MP, data = SF)
 summary(week7_Model)
-testModel_MSE <- mean(week7_Model$residuals^2)
+week7_Model_MSE <- mean(week7_Model$residuals^2)
 vif(week7_Model)
+
+median(SF$PTS)
 
